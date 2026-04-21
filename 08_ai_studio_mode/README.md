@@ -17,3 +17,5 @@ That means the AI lesson should also avoid repeating earlier chapters:
 - engineers may use AI for task drafting or implementation planning
 
 AI should appear as a boundary capability layered onto already-clear agent roles, not as a replacement for the architecture the earlier lessons established.
+
+By the time this chapter starts, the startup should already feel structurally complete without AI. That way the reader can see AI as an augmentation layer rather than as the thing that made the system coherent in the first place.

@@ -1,20 +1,21 @@
-# Lesson 06: The Studio Learns a Rhythm
+# Lesson 06: The CTO Builds an Engineering Org
 
-With a CTO in place, the studio can finally add the next layer down: someone who manages the day-to-day engineering loop and keeps delivery moving.
+With a CTO in place, the next realistic step is not QA or automation yet. It is execution capacity.
+
+The company now needs the first real engineering layer beneath technical leadership.
 
 This chapter will introduce:
 
 - an `EngineeringManagerAgent`
 - one or more `EngineerAgent`s
-- scheduling
-- recurring workflows
-- QA or playtest feedback loops
-- recurring engineering and operations cadences
+- team-level work delegation
+- fan-out from a manager to specialized worker agents
+- aggregation of engineering results back up to the CTO
 
-At this point, the CTO sets direction, the engineering manager coordinates execution, engineers deliver scoped work, and the system starts repeating on a cadence.
+At this point, the CTO sets direction, the engineering manager coordinates execution, and engineers deliver scoped work.
 
 This chapter should teach something different from the CTO chapter:
 
 - the `EngineeringManagerAgent` teaches fan-out and result aggregation across multiple children
 - the `EngineerAgent` teaches specialized worker state and narrow task execution
-- the recurring cadence teaches how Jido handles ongoing delivery loops without collapsing everything back into the founder
+- the lesson should stay focused on execution structure, not yet on recurring cadence or QA pressure
