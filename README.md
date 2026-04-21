@@ -30,6 +30,25 @@ The Jido lessons follow the same arc:
 7. cross-functional recurring workflows, design-feedback loops, testability, and observability under operational pressure
 8. AI assistance layered onto already-clear agent responsibilities
 
+## Final Company Shape
+
+By the end of the tutorial, the studio looks roughly like this:
+
+```text
+CEOAgent
+|- BackofficeAgent
+|- RecruiterAgent
+|- CTOAgent
+|  `- EngineeringManagerAgent
+|     |- EngineerAgent (gameplay)
+|     `- EngineerAgent (ui)
+`- ProductManagerAgent
+   |- DesignerAgent
+   `- QAAgent
+```
+
+That chart is intentionally small. It is enough structure to feel like a real startup without turning the tutorial into a corporate diagram.
+
 ## How This Repo Is Structured
 
 - `01_founder_bootstrap` is a complete, runnable Mix project
@@ -48,7 +67,7 @@ The Jido lessons follow the same arc:
 | `04_spawn_backoffice_and_recruiter` | Spawning backoffice and recruiting support | Implemented |
 | `05_hire_a_cto` | Introducing the CTO and technical ownership boundaries | Implemented |
 | `06_engineering_org` | Building the engineering org with fan-out and aggregation | Implemented |
-| `07_product_design_qa_rhythm` | Adding product, design, QA, and recurring delivery rhythm | Scaffolded |
+| `07_product_design_qa_rhythm` | Adding product, design, QA, and recurring delivery rhythm | Implemented |
 | `08_ai_studio_mode` | AI-assisted workflows with `req_llm` | Scaffolded |
 
 ## Tooling
