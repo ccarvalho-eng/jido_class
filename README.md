@@ -4,10 +4,13 @@
 
 The series starts with one founder agent and gradually adds runtime behavior, plugins, specialized child agents, recurring operations, observability, and AI assistance. Each lesson is designed to be understandable on its own while still continuing the same company storyline.
 
+Each new role is also a new Jido teaching surface. The course should not repeat the same pattern with different job titles. Instead, every added agent type exists because it lets the story introduce a new runtime or coordination idea cleanly.
+
 ## How This Repo Is Structured
 
 - `01_founder_bootstrap` is a complete, runnable Mix project
-- `02` through `08` are scaffolded chapter directories that describe the next steps in the series
+- `02_founder_runtime`, `03_backoffice_plugin`, and `04_spawn_backoffice_and_recruiter` are also complete, runnable Mix projects
+- `05` through `08` are scaffolded chapter directories that describe the next steps in the series
 - the repo root is only for series documentation; each runnable lesson owns its own Elixir project files
 
 ## Current Lesson Status
@@ -17,7 +20,7 @@ The series starts with one founder agent and gradually adds runtime behavior, pl
 | `01_founder_bootstrap` | Pure agents, actions, and `cmd/2` | Implemented |
 | `02_founder_runtime` | Signals, routing, and `AgentServer` | Implemented |
 | `03_backoffice_plugin` | Plugins and operational capabilities | Implemented |
-| `04_spawn_backoffice_and_recruiter` | Spawning backoffice and recruiting support | Scaffolded |
+| `04_spawn_backoffice_and_recruiter` | Spawning backoffice and recruiting support | Implemented |
 | `05_hire_engineer_and_build` | Introducing the CTO and technical handoff | Scaffolded |
 | `06_add_qa_and_recurring_ops` | Adding engineering management and recurring delivery loops | Scaffolded |
 | `07_observability_and_testability` | Testing and observability | Scaffolded |

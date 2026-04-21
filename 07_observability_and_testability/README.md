@@ -9,3 +9,12 @@ This chapter will introduce:
 - observability and debugging hooks
 
 The focus is confidence: understanding what happened and proving the system still behaves as intended.
+
+By this stage, the story should also pay off the previous org layers:
+
+- CEO-level outcomes
+- CTO-level technical decisions
+- engineering-manager aggregation
+- engineer execution traces
+
+The lesson should show how to inspect those layers distinctly instead of treating the whole system as one opaque runtime.

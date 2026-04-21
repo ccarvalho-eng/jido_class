@@ -11,4 +11,10 @@ This chapter will introduce:
 - QA or playtest feedback loops
 - recurring engineering and operations cadences
 
-At this point, the CTO sets direction, the engineering manager coordinates execution, engineers deliver scoped work, and the system starts repeating on a cadence. The lesson should show how Jido handles that rhythm without collapsing everything back into the founder.
+At this point, the CTO sets direction, the engineering manager coordinates execution, engineers deliver scoped work, and the system starts repeating on a cadence.
+
+This chapter should teach something different from the CTO chapter:
+
+- the `EngineeringManagerAgent` teaches fan-out and result aggregation across multiple children
+- the `EngineerAgent` teaches specialized worker state and narrow task execution
+- the recurring cadence teaches how Jido handles ongoing delivery loops without collapsing everything back into the founder
