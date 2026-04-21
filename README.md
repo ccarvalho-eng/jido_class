@@ -15,7 +15,7 @@ The series starts with one founder agent and gradually adds runtime behavior, pl
 | Lesson | Focus | Status |
 | --- | --- | --- |
 | `01_founder_bootstrap` | Pure agents, actions, and `cmd/2` | Implemented |
-| `02_founder_runtime` | Signals, routing, and `AgentServer` | Scaffolded |
+| `02_founder_runtime` | Signals, routing, and `AgentServer` | Implemented |
 | `03_backoffice_plugin` | Plugins and operational capabilities | Scaffolded |
 | `04_spawn_backoffice_and_recruiter` | Spawning specialized child agents | Scaffolded |
 | `05_hire_engineer_and_build` | Multi-agent milestone delivery | Scaffolded |
