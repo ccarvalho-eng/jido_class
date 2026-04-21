@@ -16,10 +16,10 @@ The series starts with one founder agent and gradually adds runtime behavior, pl
 | --- | --- | --- |
 | `01_founder_bootstrap` | Pure agents, actions, and `cmd/2` | Implemented |
 | `02_founder_runtime` | Signals, routing, and `AgentServer` | Implemented |
-| `03_backoffice_plugin` | Plugins and operational capabilities | Scaffolded |
-| `04_spawn_backoffice_and_recruiter` | Spawning specialized child agents | Scaffolded |
-| `05_hire_engineer_and_build` | Multi-agent milestone delivery | Scaffolded |
-| `06_add_qa_and_recurring_ops` | Scheduling and recurring workflows | Scaffolded |
+| `03_backoffice_plugin` | Plugins and operational capabilities | Implemented |
+| `04_spawn_backoffice_and_recruiter` | Spawning backoffice and recruiting support | Scaffolded |
+| `05_hire_engineer_and_build` | Introducing the CTO and technical handoff | Scaffolded |
+| `06_add_qa_and_recurring_ops` | Adding engineering management and recurring delivery loops | Scaffolded |
 | `07_observability_and_testability` | Testing and observability | Scaffolded |
 | `08_ai_studio_mode` | AI-assisted workflows with `req_llm` | Scaffolded |
 

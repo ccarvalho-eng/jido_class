@@ -1,11 +1,25 @@
-# Lesson 05: Build the First Prototype
+# Lesson 05: The CTO Builds an Engineering Team
 
-Once hiring is possible, the studio can finally assign engineering work toward a real milestone.
+Once operations and recruiting exist, the next realistic step is a technical leader who can take engineering strategy away from the CEO.
 
 This chapter will introduce:
 
-- specialized engineer behavior
-- multi-agent coordination
-- aggregation of milestone results
+- a `CTOAgent`
+- technical delegation from the CEO to the CTO
+- milestone framing for the future engineering org
 
-The story shift is simple: the founder is no longer doing the work directly, but coordinating the right agents to get the prototype built.
+The story shift is important:
+
+- the founder coordinates the company
+- the `CTOAgent` owns technical direction and hiring intent
+
+This lesson is intentionally small. It establishes the top of the technical reporting line without immediately adding every layer beneath it.
+
+The target reporting line for the next lessons is:
+
+- `CEOAgent`
+- `CTOAgent`
+- `EngineeringManagerAgent`
+- `EngineerAgent`
+
+That makes the engineering side of the startup feel more like a real organization instead of a founder directly dispatching every implementation task.
