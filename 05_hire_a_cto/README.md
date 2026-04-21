@@ -282,7 +282,7 @@ This pattern becomes more important as the company grows:
 - the CTO should not need to push every internal technical note upward
 - later, the engineering manager should not need to carry the CEO’s concerns either
 
-Each layer should own its own level of abstraction.
+Each layer owns its own altitude.
 
 Jido does not enforce that rule for you. But the framework makes it natural when you model agents by domain responsibility instead of just by process count.
 
@@ -317,6 +317,8 @@ The CTO can own technical direction, but there is still nobody managing day-to-d
 There is no engineering manager yet.
 There are no engineer agents yet.
 There is still no recurring delivery loop.
+
+The company can see the mountain now, but it still cannot climb it.
 
 That is the next stage of growth.
 

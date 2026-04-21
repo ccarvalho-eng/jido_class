@@ -14,7 +14,7 @@ Real startups do not run as one-off commands forever. They repeat:
 
 That recurring pressure is exactly where observability and testability start to matter.
 
-This chapter will introduce:
+This chapter brings in:
 
 - a `ProductManagerAgent`
 - a `DesignerAgent`
@@ -23,9 +23,9 @@ This chapter will introduce:
 - workflow-level regression tests
 - observability and debugging hooks for repeated runtime behavior
 
-The focus is confidence under repetition: understanding what happened, proving the loops still behave as intended, and making the ongoing system inspectable.
+The focus is confidence under repetition: knowing what happened, proving the loops still behave as intended, and making the ongoing system inspectable.
 
-The product manager belongs here, not earlier, because this is the point where the CEO should stop being the default product owner. The designer belongs here for the same reason: once engineering has a real execution layer, the studio also needs a role that can shape player-facing decisions without forcing the CTO or engineers to absorb that work.
+The product manager belongs here because this is the point where the CEO can finally stop acting as the default product owner. The designer arrives for the same reason. Once engineering has a real execution layer, the studio also needs someone shaping the player-facing experience without turning the CTO or the engineers into accidental designers.
 
 At this stage the studio needs roles that can:
 
@@ -34,7 +34,7 @@ At this stage the studio needs roles that can:
 - negotiate tradeoffs with technical leadership
 - keep recurring planning loops healthy
 
-By this stage, the story should also pay off the previous org layers:
+By this point the story can finally play all of its layers at once:
 
 - CEO-level outcomes
 - product-level milestone framing
@@ -43,4 +43,4 @@ By this stage, the story should also pay off the previous org layers:
 - engineering-manager aggregation
 - engineer execution traces
 
-The lesson should show how to inspect those layers distinctly instead of treating the whole studio as one opaque runtime.
+Instead of treating the whole studio as one opaque runtime, this chapter follows the motion between those layers and makes the rhythm visible.

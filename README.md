@@ -4,11 +4,11 @@
 
 The series starts with one founder agent and gradually adds runtime behavior, plugins, specialized child agents, recurring operations, observability, and AI assistance. Each lesson is designed to be understandable on its own while still continuing the same company storyline.
 
-Each new role is also a new Jido teaching surface. The course should not repeat the same pattern with different job titles. Instead, every added agent type exists because it lets the story introduce a new runtime or coordination idea cleanly.
+Each new role opens a new Jido idea. The point is not to decorate the org chart with more titles. The point is to let the studio grow in believable steps while each chapter introduces a fresh coordination pattern.
 
 ## Story Progression
 
-The company should grow in a way that still feels like a real startup:
+The company grows the way an ambitious little startup often does:
 
 1. one founder gets organized
 2. the founder becomes a live runtime participant
@@ -17,9 +17,9 @@ The company should grow in a way that still feels like a real startup:
 5. the CEO hires a CTO to own technical direction
 6. the CTO adds engineering management and engineers for execution
 7. the CEO stops being the default product owner as product, design, and QA add recurring delivery rhythm
-8. AI is added last, on top of clear human-style role boundaries
+8. AI arrives last, after the human-style boundaries are already clear
 
-The teaching progression should mirror that company growth:
+The Jido lessons follow the same arc:
 
 1. `cmd/2` and pure state transitions
 2. runtime signals and `AgentServer`
@@ -34,7 +34,8 @@ The teaching progression should mirror that company growth:
 
 - `01_founder_bootstrap` is a complete, runnable Mix project
 - `02_founder_runtime`, `03_backoffice_plugin`, `04_spawn_backoffice_and_recruiter`, and `05_hire_a_cto` are also complete, runnable Mix projects
-- `06` through `08` are scaffolded chapter directories that describe the next steps in the series
+- `06_engineering_org` is a complete, runnable Mix project
+- `07` and `08` are scaffolded chapter directories that describe the next steps in the series
 - the repo root is only for series documentation; each runnable lesson owns its own Elixir project files
 
 ## Current Lesson Status
@@ -46,7 +47,7 @@ The teaching progression should mirror that company growth:
 | `03_backoffice_plugin` | Plugins and operational capabilities | Implemented |
 | `04_spawn_backoffice_and_recruiter` | Spawning backoffice and recruiting support | Implemented |
 | `05_hire_a_cto` | Introducing the CTO and technical ownership boundaries | Implemented |
-| `06_engineering_org` | Building the engineering org with fan-out and aggregation | Scaffolded |
+| `06_engineering_org` | Building the engineering org with fan-out and aggregation | Implemented |
 | `07_product_design_qa_rhythm` | Adding product, design, QA, and recurring delivery rhythm | Scaffolded |
 | `08_ai_studio_mode` | AI-assisted workflows with `req_llm` | Scaffolded |
 

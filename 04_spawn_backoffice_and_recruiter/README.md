@@ -296,6 +296,6 @@ That is the next problem.
 
 ## Next Lesson
 
-In [`05_hire_a_cto`](../05_hire_a_cto/README.md), we will introduce the `CTOAgent`.
+[`05_hire_a_cto`](../05_hire_a_cto/README.md) introduces the `CTOAgent`.
 
-That chapter should not repeat the support-team pattern. Instead, it will use the CTO role to teach a different Jido idea: technical ownership boundaries and delegation of engineering outcomes from the CEO to a dedicated technical leader.
+That chapter moves the company from support structure into technical leadership. The important shift is not another child process. It is the arrival of a real technical boundary, where the CEO stops carrying detailed engineering decisions and the CTO starts owning them.
