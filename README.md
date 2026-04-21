@@ -1,10 +1,10 @@
 # jido_class
 
-`jido_class` teaches Jido by following the growth of a tiny autonomous game studio.
+`jido_class` teaches Jido by following the slow brightening of a tiny autonomous game studio.
 
-The series starts with one founder agent and gradually adds runtime behavior, plugins, specialized child agents, recurring operations, observability, and AI assistance. Each lesson is designed to be understandable on its own while still continuing the same company storyline.
+The series begins with one founder agent and gradually adds runtime behavior, plugins, specialized child agents, recurring operations, observability, and AI assistance. Each lesson stands on its own, but together they follow the same company as it learns how to think, delegate, and keep its footing.
 
-Each new role opens a new Jido idea. The point is not to decorate the org chart with more titles. The point is to let the studio grow in believable steps while each chapter introduces a fresh coordination pattern.
+Each new role opens a new Jido idea. The point is not to decorate the org chart with titles. The point is to let the studio grow in believable steps while every chapter introduces a fresh coordination pattern.
 
 ## Story Progression
 
@@ -49,26 +49,42 @@ CEOAgent
 
 That chart is intentionally small. It is enough structure to feel like a real startup without turning the tutorial into a corporate diagram.
 
-## How This Repo Is Structured
+## Chapters
 
-- `01_founder_bootstrap` is a complete, runnable Mix project
-- `02_founder_runtime`, `03_backoffice_plugin`, `04_spawn_backoffice_and_recruiter`, and `05_hire_a_cto` are also complete, runnable Mix projects
-- `06_engineering_org` is a complete, runnable Mix project
-- `07` and `08` are scaffolded chapter directories that describe the next steps in the series
-- the repo root is only for series documentation; each runnable lesson owns its own Elixir project files
+Each lesson is its own standalone Mix project:
 
-## Current Lesson Status
+- [`01_founder_bootstrap`](./01_founder_bootstrap/README.md): pure agents, actions, and `cmd/2`
+- [`02_founder_runtime`](./02_founder_runtime/README.md): signals, routing, and `AgentServer`
+- [`03_backoffice_plugin`](./03_backoffice_plugin/README.md): plugins and operational capability
+- [`04_spawn_backoffice_and_recruiter`](./04_spawn_backoffice_and_recruiter/README.md): support-team hierarchy
+- [`05_hire_a_cto`](./05_hire_a_cto/README.md): technical ownership boundaries
+- [`06_engineering_org`](./06_engineering_org/README.md): engineering fan-out and aggregation
+- [`07_product_design_qa_rhythm`](./07_product_design_qa_rhythm/README.md): recurring cross-functional loops
+- [`08_ai_studio_mode`](./08_ai_studio_mode/README.md): AI assistance through runtime instructions and adapters
 
-| Lesson | Focus | Status |
-| --- | --- | --- |
-| `01_founder_bootstrap` | Pure agents, actions, and `cmd/2` | Implemented |
-| `02_founder_runtime` | Signals, routing, and `AgentServer` | Implemented |
-| `03_backoffice_plugin` | Plugins and operational capabilities | Implemented |
-| `04_spawn_backoffice_and_recruiter` | Spawning backoffice and recruiting support | Implemented |
-| `05_hire_a_cto` | Introducing the CTO and technical ownership boundaries | Implemented |
-| `06_engineering_org` | Building the engineering org with fan-out and aggregation | Implemented |
-| `07_product_design_qa_rhythm` | Adding product, design, QA, and recurring delivery rhythm | Implemented |
-| `08_ai_studio_mode` | AI-assisted workflows with `req_llm` | Scaffolded |
+The repo root only holds the series guide. Each chapter owns its own code, dependencies, and tests.
+
+## Beyond the Series
+
+The eight main chapters already cover the core Jido arc most readers need:
+
+- pure `cmd/2`
+- runtime signals and directives
+- plugins
+- spawned hierarchies
+- domain boundaries
+- fan-out and aggregation
+- recurring loops
+- runtime AI boundaries
+
+Jido has a few deeper branches that could become bonus chapters or appendices later:
+
+- **Sensors**: a strong fit for a post-launch chapter where the studio starts listening to ambient signals such as playtest telemetry, crash alerts, or market events. Jido’s sensor runtime is designed for exactly that kind of external monitoring surface.
+- **Cron-backed recurring jobs**: lesson 7 teaches short scheduled loops with `Directive.schedule/2`, but Jido also supports recurring cron directives when the studio needs longer-lived operational rhythms.
+- **Persistence and hibernation**: once agents represent durable operational state, Jido’s persistence and `InstanceManager` lifecycle become relevant for waking the same company back up instead of rebuilding it from scratch.
+- **FSM strategy**: if the studio ever needs a more explicit release pipeline or approval flow, Jido’s FSM strategy offers a more formal execution-state model around `cmd/2`.
+
+Those are worth learning. They simply sit one layer past the story this series is trying to tell.
 
 ## Tooling
 

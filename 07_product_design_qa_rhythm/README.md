@@ -12,7 +12,7 @@ Real startups do not move forward through one-off commands forever. They repeat:
 - feedback loops
 - course corrections
 
-This chapter is where the company starts to feel like a real game team.
+This chapter is where the company stops sounding like a set of roles and starts sounding like a team.
 
 ## What You'll Learn
 
@@ -39,7 +39,7 @@ At this stage, a believable startup starts asking different questions:
 
 Those questions are not about hierarchy. They are about rhythm.
 
-That is why this lesson puts the `ProductManagerAgent` at the center. The PM does not replace the CTO or the engineering manager. The PM owns the repeated loop that turns feedback into the next round of decisions.
+That is why this lesson puts the `ProductManagerAgent` at the center. The PM does not replace the CTO or the engineering manager. The PM owns the repeated loop that turns feedback into the next round of decisions, the way a real team slowly learns the shape of its own game.
 
 ## The Jido Concept
 
