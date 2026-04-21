@@ -13,6 +13,8 @@ The end state is a small autonomous studio where specialized agents still own th
 That means the AI lesson should also avoid repeating earlier chapters:
 
 - the CEO uses AI for framing and prioritization
+- the product manager uses AI for roadmap and scope drafting
+- the designer uses AI for exploration, concept variation, or playtest-driven UI iteration
 - the CTO uses AI for technical option shaping
 - engineers may use AI for task drafting or implementation planning
 

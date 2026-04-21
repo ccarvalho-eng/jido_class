@@ -19,3 +19,5 @@ This chapter should teach something different from the CTO chapter:
 - the `EngineeringManagerAgent` teaches fan-out and result aggregation across multiple children
 - the `EngineerAgent` teaches specialized worker state and narrow task execution
 - the lesson should stay focused on execution structure, not yet on recurring cadence or QA pressure
+
+The CEO is still acting as the default product and design owner at this stage. That is realistic enough for a small startup and leaves room for the next lesson to introduce dedicated product and design roles only when delivery coordination becomes genuinely cross-functional.

@@ -296,6 +296,6 @@ That is the next problem.
 
 ## Next Lesson
 
-In [`05_hire_engineer_and_build`](../05_hire_engineer_and_build/README.md), we will introduce the `CTOAgent`.
+In [`05_hire_a_cto`](../05_hire_a_cto/README.md), we will introduce the `CTOAgent`.
 
 That chapter should not repeat the support-team pattern. Instead, it will use the CTO role to teach a different Jido idea: technical ownership boundaries and delegation of engineering outcomes from the CEO to a dedicated technical leader.

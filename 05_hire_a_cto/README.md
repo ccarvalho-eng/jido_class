@@ -207,7 +207,7 @@ That is a cleaner company structure and a cleaner Jido model.
 Run the lesson:
 
 ```bash
-cd 05_hire_engineer_and_build
+cd 05_hire_a_cto
 mix deps.get
 mix test
 ```
@@ -322,4 +322,4 @@ That is the next stage of growth.
 
 ## Next Lesson
 
-In [`06_add_qa_and_recurring_ops`](../06_add_qa_and_recurring_ops/README.md), we will introduce the `EngineeringManagerAgent`, add engineers beneath that layer, and start teaching fan-out, aggregation, and recurring delivery cadence.
+In [`06_engineering_org`](../06_engineering_org/README.md), we will introduce the `EngineeringManagerAgent`, add engineers beneath that layer, and teach fan-out and result aggregation without pulling recurring cadence into the same chapter.
