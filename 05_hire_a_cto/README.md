@@ -8,6 +8,8 @@ But the CEO still should not be the person deciding how the game gets built.
 
 This chapter introduces the `CTOAgent` as the first real technical boundary in the company.
 
+Interactive companion: [`../livebooks/05_hire_a_cto.livemd`](../livebooks/05_hire_a_cto.livemd)
+
 ## What You'll Learn
 
 By the end of this lesson, you should understand:

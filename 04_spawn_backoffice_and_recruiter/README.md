@@ -8,6 +8,8 @@ This chapter is the next architectural step: the founder is now acting as the CE
 
 The important shift is not just "more agents exist." The important shift is that **the CEO now manages a hierarchy**.
 
+Interactive companion: [`../livebooks/04_spawn_backoffice_and_recruiter.livemd`](../livebooks/04_spawn_backoffice_and_recruiter.livemd)
+
 ## What You'll Learn
 
 By the end of this lesson, you should understand:

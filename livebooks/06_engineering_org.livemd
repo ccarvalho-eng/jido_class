@@ -1,0 +1,150 @@
+# Lesson 06 Livebook: Engineering Org
+
+Lesson 6 adds the execution layer: the CTO delegates through an engineering manager, engineers do the work, and delivery aggregates back up.
+
+```elixir
+Mix.install([
+  {:engineering_org, path: "../06_engineering_org"}
+])
+
+Application.ensure_all_started(:engineering_org)
+```
+
+## Helpers
+
+```elixir
+defmodule Lesson06Helpers do
+  alias EngineeringOrg.StudioJido
+
+  def unique_agent_id(prefix) do
+    "#{prefix}-#{System.unique_integer([:positive])}"
+  end
+
+  def wait_until(fun, attempts \\ 40)
+
+  def wait_until(fun, attempts) when attempts > 0 do
+    case fun.() do
+      nil ->
+        Process.sleep(50)
+        wait_until(fun, attempts - 1)
+
+      value ->
+        value
+    end
+  end
+
+  def wait_until(_fun, 0) do
+    raise "condition was not met before the timeout"
+  end
+
+  def safe_stop_family(cto_id) do
+    child_ids = [
+      "#{cto_id}/engineering_manager/gameplay_engineer",
+      "#{cto_id}/engineering_manager/ui_engineer",
+      "#{cto_id}/engineering_manager"
+    ]
+
+    Enum.each(child_ids, fn child_id ->
+      case StudioJido.whereis(child_id) do
+        nil -> :ok
+        _pid -> StudioJido.stop_agent(child_id)
+      end
+    end)
+
+    case StudioJido.whereis(cto_id) do
+      nil -> :ok
+      _pid -> StudioJido.stop_agent(cto_id)
+    end
+  end
+end
+```
+
+## Fan Work Out And Aggregate It Back
+
+```elixir
+alias EngineeringOrg.{CTOAgent, StudioJido}
+alias Jido.AgentServer
+alias Jido.Signal
+
+cto_id = Lesson06Helpers.unique_agent_id("cto")
+{:ok, cto_pid} = StudioJido.start_agent(CTOAgent, id: cto_id)
+
+{:ok, _cto} =
+  AgentServer.call(
+    cto_pid,
+    Signal.new!("studio.execution_layer_requested", %{}, source: "/cto")
+  )
+
+cto_state =
+  Lesson06Helpers.wait_until(fn ->
+    {:ok, state} = AgentServer.state(cto_pid)
+
+    if Map.has_key?(state.children, :engineering_manager) do
+      state
+    end
+  end)
+
+manager_pid = cto_state.children.engineering_manager.pid
+
+{:ok, _manager} =
+  AgentServer.call(
+    manager_pid,
+    Signal.new!("engineering.team_bootstrap_requested", %{milestone: "vertical slice"},
+      source: "/cto"
+    )
+  )
+
+manager_state =
+  Lesson06Helpers.wait_until(fn ->
+    {:ok, state} = AgentServer.state(manager_pid)
+
+    if Map.has_key?(state.children, :gameplay_engineer) and Map.has_key?(state.children, :ui_engineer) do
+      state
+    end
+  end)
+
+{:ok, _gameplay_engineer} =
+  AgentServer.call(
+    manager_state.children.gameplay_engineer.pid,
+    Signal.new!(
+      "engineer.task_assigned",
+      %{task: "combat timing pass", deliverable: "combat loop feels responsive"},
+      source: "/engineering_manager"
+    )
+  )
+
+{:ok, _ui_engineer} =
+  AgentServer.call(
+    manager_state.children.ui_engineer.pid,
+    Signal.new!(
+      "engineer.task_assigned",
+      %{task: "hud readability pass", deliverable: "combat hud is legible"},
+      source: "/engineering_manager"
+    )
+  )
+
+final_manager_state =
+  Lesson06Helpers.wait_until(fn ->
+    {:ok, state} = AgentServer.state(manager_pid)
+
+    if length(state.agent.state.completed_reports) == 2 do
+      state
+    end
+  end)
+
+final_cto_state =
+  Lesson06Helpers.wait_until(fn ->
+    {:ok, state} = AgentServer.state(cto_pid)
+
+    if state.agent.state.milestone_snapshots != [] do
+      state
+    end
+  end)
+
+Lesson06Helpers.safe_stop_family(cto_id)
+
+%{
+  engineer_reports: final_manager_state.agent.state.completed_reports,
+  milestone_snapshots: final_cto_state.agent.state.milestone_snapshots
+}
+```

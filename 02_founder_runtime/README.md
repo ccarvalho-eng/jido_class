@@ -8,6 +8,8 @@ The studio can already organize ideas through pure `cmd/2` calls, but everything
 
 This chapter introduces the next Jido step: running the same founder as an `AgentServer` that processes studio signals.
 
+Interactive companion: [`../livebooks/02_founder_runtime.livemd`](../livebooks/02_founder_runtime.livemd)
+
 ## What You'll Learn
 
 By the end of this lesson, you should understand:

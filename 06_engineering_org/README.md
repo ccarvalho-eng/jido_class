@@ -8,6 +8,8 @@ The CTO can own architecture focus and hiring intent, but a CTO alone still does
 
 This chapter introduces the first real engineering org beneath the CTO.
 
+Interactive companion: [`../livebooks/06_engineering_org.livemd`](../livebooks/06_engineering_org.livemd)
+
 ## What You'll Learn
 
 By the end of this lesson, you should understand:

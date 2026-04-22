@@ -14,6 +14,8 @@ Real startups do not move forward through one-off commands forever. They repeat:
 
 This chapter is where the company stops sounding like a set of roles and starts sounding like a team.
 
+Interactive companion: [`../livebooks/07_product_design_qa_rhythm.livemd`](../livebooks/07_product_design_qa_rhythm.livemd)
+
 ## What You'll Learn
 
 By the end of this lesson, you will have seen:

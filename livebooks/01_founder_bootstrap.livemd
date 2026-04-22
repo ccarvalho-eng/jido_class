@@ -1,0 +1,59 @@
+# Lesson 01 Livebook: Founder Bootstrap
+
+This notebook keeps lesson 1 focused on the pure Jido contract.
+
+```elixir
+Mix.install([
+  {:founder_bootstrap, path: "../01_founder_bootstrap"}
+])
+```
+
+## Walk The Founder Through One Decision
+
+```elixir
+alias JidoClass.FounderAgent
+alias JidoClass.Actions.{AddIdea, GreenlightIdea, PlanMilestone}
+
+founder = FounderAgent.new()
+
+{founder, []} =
+  FounderAgent.cmd(
+    founder,
+    {AddIdea,
+     %{
+       name: "Dungeon Postal",
+       genre: "management sim",
+       hook: "Deliver mail in a cursed dungeon"
+     }}
+  )
+
+{founder, []} =
+  FounderAgent.cmd(
+    founder,
+    {AddIdea,
+     %{
+       name: "Orbit Cafe",
+       genre: "cozy sim",
+       hook: "Run a coffee shop on a drifting station"
+     }}
+  )
+
+{founder, []} = FounderAgent.cmd(founder, {GreenlightIdea, %{name: "Orbit Cafe"}})
+{founder, []} = FounderAgent.cmd(founder, {PlanMilestone, %{milestone: "build a playable prototype"}})
+
+founder.state
+```
+
+## Inspect The Failure Surface
+
+```elixir
+{unchanged_founder, directives} =
+  FounderAgent.cmd(FounderAgent.new(), {GreenlightIdea, %{name: "Missing Project"}})
+
+%{
+  active_idea: unchanged_founder.state.active_idea,
+  directives: directives
+}
+```
+
+Both success and failure stay explicit in `cmd/2`.

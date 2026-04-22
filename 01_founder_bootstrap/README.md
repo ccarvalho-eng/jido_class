@@ -8,6 +8,8 @@ In this first lesson, we build the smallest useful piece of the company: a `Foun
 
 This chapter is intentionally small. The goal is not to build a full company. The goal is to understand the core Jido mental model before we add signals, runtime processes, or multiple agents.
 
+Interactive companion: [`../livebooks/01_founder_bootstrap.livemd`](../livebooks/01_founder_bootstrap.livemd)
+
 ## What You'll Learn
 
 By the end of this lesson, you should understand:
