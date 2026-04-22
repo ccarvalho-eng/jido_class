@@ -144,16 +144,12 @@ mix deps.get
 mix test
 ```
 
-If your shell is not already using asdf shims first:
-
-```bash
-PATH="$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH" mix test
-```
+If `mix` is not available in your shell, configure your asdf shims first.
 
 You can also run the founder live in `iex`:
 
 ```bash
-PATH="$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH" iex -S mix
+iex -S mix
 ```
 
 Then:
