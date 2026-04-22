@@ -93,6 +93,13 @@ If your shell is not already resolving asdf shims first, prefix commands like th
 PATH="$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH" mix test
 ```
 
+For the Livebook companions, use the repo-root helper scripts:
+
+```bash
+./scripts/install_livebook.sh
+./scripts/livebook.sh server livebooks
+```
+
 ## Start Here
 
 Begin with [`01_founder_bootstrap`](./01_founder_bootstrap/README.md).
