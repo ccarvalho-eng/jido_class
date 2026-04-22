@@ -1,0 +1,77 @@
+# Lesson 03 Livebook: Backoffice Plugin
+
+This notebook shows the founder keeping core studio behavior while plugin-owned state stays namespaced under `:backoffice`.
+
+```elixir
+Mix.install([
+  {:backoffice_plugin, path: "../03_backoffice_plugin"}
+])
+
+Application.ensure_all_started(:backoffice_plugin)
+```
+
+## Helpers
+
+```elixir
+defmodule Lesson03Helpers do
+  alias BackofficePlugin.StudioJido
+
+  def unique_agent_id(prefix) do
+    "#{prefix}-#{System.unique_integer([:positive])}"
+  end
+
+  def safe_stop(agent_id) do
+    case StudioJido.whereis(agent_id) do
+      nil -> :ok
+      _pid -> StudioJido.stop_agent(agent_id)
+    end
+  end
+end
+```
+
+## Add Operations Without Bloated Founder State
+
+```elixir
+alias BackofficePlugin.{FounderAgent, StudioJido}
+alias Jido.AgentServer
+alias Jido.Signal
+
+founder = FounderAgent.new()
+
+founder_plugin_defaults = %{
+  monthly_budget: founder.state.backoffice.monthly_budget,
+  hiring_budget: founder.state.backoffice.hiring_budget,
+  allocations: founder.state.backoffice.allocations,
+  payroll_ready: founder.state.backoffice.payroll_ready
+}
+
+founder_id = Lesson03Helpers.unique_agent_id("backoffice-founder")
+{:ok, pid} = StudioJido.start_agent(FounderAgent, id: founder_id)
+
+{:ok, _founder} =
+  AgentServer.call(
+    pid,
+    Signal.new!(
+      "studio.idea_submitted",
+      %{
+        name: "Orbit Cafe",
+        genre: "cozy sim",
+        hook: "Run a coffee shop on a drifting station"
+      },
+      source: "/livebook"
+    )
+  )
+
+{:ok, founder} =
+  AgentServer.call(
+    pid,
+    Signal.new!("backoffice.budget_allocated", %{category: "art", amount: 1_500}, source: "/ops")
+  )
+
+Lesson03Helpers.safe_stop(founder_id)
+
+%{
+  plugin_defaults: founder_plugin_defaults,
+  combined_state: founder.state
+}
+```

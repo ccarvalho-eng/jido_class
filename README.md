@@ -6,6 +6,19 @@ The series begins with one founder agent and gradually adds runtime behavior, pl
 
 Each new role opens a new Jido idea. The point is not to decorate the org chart with titles. The point is to let the studio grow in believable steps while every chapter introduces a fresh coordination pattern.
 
+## Interactive Companions
+
+Livebook companions for the full series live in [`livebooks/`](./livebooks/README.md).
+
+- [`livebooks/01_founder_bootstrap.livemd`](./livebooks/01_founder_bootstrap.livemd)
+- [`livebooks/02_founder_runtime.livemd`](./livebooks/02_founder_runtime.livemd)
+- [`livebooks/03_backoffice_plugin.livemd`](./livebooks/03_backoffice_plugin.livemd)
+- [`livebooks/04_spawn_backoffice_and_recruiter.livemd`](./livebooks/04_spawn_backoffice_and_recruiter.livemd)
+- [`livebooks/05_hire_a_cto.livemd`](./livebooks/05_hire_a_cto.livemd)
+- [`livebooks/06_engineering_org.livemd`](./livebooks/06_engineering_org.livemd)
+- [`livebooks/07_product_design_qa_rhythm.livemd`](./livebooks/07_product_design_qa_rhythm.livemd)
+- [`livebooks/08_ai_studio_mode.livemd`](./livebooks/08_ai_studio_mode.livemd)
+
 ## The Journey
 
 Each lesson is its own standalone Mix project, but the company and the framework ideas advance together:

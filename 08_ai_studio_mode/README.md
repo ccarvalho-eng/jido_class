@@ -13,6 +13,8 @@ By now the company has:
 
 This lesson does not replace that structure. It adds a new capability at the boundary, where outside help belongs.
 
+Interactive companion: [`../livebooks/08_ai_studio_mode.livemd`](../livebooks/08_ai_studio_mode.livemd)
+
 ## What You'll Learn
 
 By the end of this lesson, you will have seen:

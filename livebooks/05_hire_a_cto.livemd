@@ -1,0 +1,113 @@
+# Lesson 05 Livebook: Hire A CTO
+
+This notebook focuses on the ownership boundary from lesson 5: the CEO gets a summary, while the CTO keeps the real technical plan.
+
+```elixir
+Mix.install([
+  {:hire_engineer_and_build, path: "../05_hire_a_cto"}
+])
+
+Application.ensure_all_started(:hire_engineer_and_build)
+```
+
+## Helpers
+
+```elixir
+defmodule Lesson05Helpers do
+  alias HireEngineerAndBuild.StudioJido
+
+  def unique_agent_id(prefix) do
+    "#{prefix}-#{System.unique_integer([:positive])}"
+  end
+
+  def wait_until(fun, attempts \\ 20)
+
+  def wait_until(fun, attempts) when attempts > 0 do
+    case fun.() do
+      nil ->
+        Process.sleep(50)
+        wait_until(fun, attempts - 1)
+
+      value ->
+        value
+    end
+  end
+
+  def wait_until(_fun, 0) do
+    raise "condition was not met before the timeout"
+  end
+
+  def safe_stop_family(parent_id) do
+    child_ids = ["#{parent_id}/cto"]
+
+    Enum.each(child_ids, fn child_id ->
+      case StudioJido.whereis(child_id) do
+        nil -> :ok
+        _pid -> StudioJido.stop_agent(child_id)
+      end
+    end)
+
+    case StudioJido.whereis(parent_id) do
+      nil -> :ok
+      _pid -> StudioJido.stop_agent(parent_id)
+    end
+  end
+end
+```
+
+## Ask The CTO For Strategy
+
+```elixir
+alias HireEngineerAndBuild.{CEOAgent, StudioJido}
+alias Jido.AgentServer
+alias Jido.Signal
+
+ceo_id = Lesson05Helpers.unique_agent_id("ceo")
+{:ok, ceo_pid} = StudioJido.start_agent(CEOAgent, id: ceo_id)
+
+{:ok, _ceo} =
+  AgentServer.call(
+    ceo_pid,
+    Signal.new!("studio.technical_leadership_requested", %{}, source: "/ceo")
+  )
+
+ceo_state =
+  Lesson05Helpers.wait_until(fn ->
+    {:ok, state} = AgentServer.state(ceo_pid)
+
+    if Map.has_key?(state.children, :cto) do
+      state
+    end
+  end)
+
+cto_pid = ceo_state.children.cto.pid
+
+{:ok, _cto} =
+  AgentServer.call(
+    cto_pid,
+    Signal.new!(
+      "cto.technical_strategy_requested",
+      %{milestone: "vertical slice", product_goal: "make combat feel responsive"},
+      source: "/ceo"
+    )
+  )
+
+updated_ceo_state =
+  Lesson05Helpers.wait_until(fn ->
+    {:ok, state} = AgentServer.state(ceo_pid)
+
+    if state.agent.state.executive_updates != [] do
+      state
+    end
+  end)
+
+{:ok, cto_state} = AgentServer.state(cto_pid)
+
+Lesson05Helpers.safe_stop_family(ceo_id)
+
+%{
+  ceo_view: updated_ceo_state.agent.state.executive_updates,
+  cto_roadmap: cto_state.agent.state.technical_roadmap,
+  cto_hiring_intent: cto_state.agent.state.hiring_intent
+}
+```

@@ -6,6 +6,8 @@ The studio has a runtime, an ID, and a signal-driven workflow. What it does not 
 
 This lesson introduces plugins as the answer to that problem.
 
+Interactive companion: [`../livebooks/03_backoffice_plugin.livemd`](../livebooks/03_backoffice_plugin.livemd)
+
 ## What You'll Learn
 
 By the end of this lesson, you should understand:

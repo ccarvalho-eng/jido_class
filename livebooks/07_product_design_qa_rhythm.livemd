@@ -1,0 +1,101 @@
+# Lesson 07 Livebook: Product Design QA Rhythm
+
+Lesson 7 is about a recurring loop that stays visible while it runs.
+
+```elixir
+Mix.install([
+  {:product_design_qa_rhythm, path: "../07_product_design_qa_rhythm"}
+])
+
+Application.ensure_all_started(:product_design_qa_rhythm)
+```
+
+## Helpers
+
+```elixir
+defmodule Lesson07Helpers do
+  alias ProductDesignQaRhythm.StudioJido
+
+  def unique_agent_id(prefix) do
+    "#{prefix}-#{System.unique_integer([:positive])}"
+  end
+
+  def wait_until(fun, attempts \\ 40)
+
+  def wait_until(fun, attempts) when attempts > 0 do
+    case fun.() do
+      nil ->
+        Process.sleep(50)
+        wait_until(fun, attempts - 1)
+
+      value ->
+        value
+    end
+  end
+
+  def wait_until(_fun, 0) do
+    raise "condition was not met before the timeout"
+  end
+
+  def safe_stop_family(product_id) do
+    child_ids = [
+      "#{product_id}/designer",
+      "#{product_id}/qa"
+    ]
+
+    Enum.each(child_ids, fn child_id ->
+      case StudioJido.whereis(child_id) do
+        nil -> :ok
+        _pid -> StudioJido.stop_agent(child_id)
+      end
+    end)
+
+    case StudioJido.whereis(product_id) do
+      nil -> :ok
+      _pid -> StudioJido.stop_agent(product_id)
+    end
+  end
+end
+```
+
+## Let The Cadence Loop Run
+
+```elixir
+alias Jido.AgentServer
+alias Jido.Signal
+alias ProductDesignQaRhythm.{ProductManagerAgent, StudioJido}
+
+product_id = Lesson07Helpers.unique_agent_id("product-manager")
+{:ok, pm_pid} = StudioJido.start_agent(ProductManagerAgent, id: product_id)
+
+{:ok, _manager} =
+  AgentServer.call(
+    pm_pid,
+    Signal.new!(
+      "studio.delivery_rhythm_requested",
+      %{
+        milestone: "vertical slice",
+        player_promise: "make the first ten minutes readable and sticky",
+        target_cycles: 2
+      },
+      source: "/ceo"
+    )
+  )
+
+final_pm_state =
+  Lesson07Helpers.wait_until(fn ->
+    {:ok, state} = AgentServer.state(pm_pid)
+
+    if state.agent.state.review_cycles_completed == 2 and
+         length(state.agent.state.review_history) == 2 do
+      state
+    end
+  end)
+
+Lesson07Helpers.safe_stop_family(product_id)
+
+%{
+  cadence_events: final_pm_state.agent.state.cadence_events,
+  review_history: final_pm_state.agent.state.review_history
+}
+```

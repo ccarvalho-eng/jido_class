@@ -1,0 +1,119 @@
+# Lesson 04 Livebook: Spawn Backoffice And Recruiter
+
+Lesson 4 is where the studio stops just adding capability and starts adding a small reporting hierarchy.
+
+```elixir
+Mix.install([
+  {:spawn_backoffice_and_recruiter, path: "../04_spawn_backoffice_and_recruiter"}
+])
+
+Application.ensure_all_started(:spawn_backoffice_and_recruiter)
+```
+
+## Helpers
+
+```elixir
+defmodule Lesson04Helpers do
+  alias SpawnBackofficeAndRecruiter.StudioJido
+
+  def unique_agent_id(prefix) do
+    "#{prefix}-#{System.unique_integer([:positive])}"
+  end
+
+  def wait_until(fun, attempts \\ 20)
+
+  def wait_until(fun, attempts) when attempts > 0 do
+    case fun.() do
+      nil ->
+        Process.sleep(50)
+        wait_until(fun, attempts - 1)
+
+      value ->
+        value
+    end
+  end
+
+  def wait_until(_fun, 0) do
+    raise "condition was not met before the timeout"
+  end
+
+  def safe_stop_family(parent_id) do
+    child_ids = ["#{parent_id}/backoffice", "#{parent_id}/recruiter"]
+
+    Enum.each(child_ids, fn child_id ->
+      case StudioJido.whereis(child_id) do
+        nil -> :ok
+        _pid -> StudioJido.stop_agent(child_id)
+      end
+    end)
+
+    case StudioJido.whereis(parent_id) do
+      nil -> :ok
+      _pid -> StudioJido.stop_agent(parent_id)
+    end
+  end
+end
+```
+
+## Spawn The Support Team And Watch Reports Flow Back
+
+```elixir
+alias Jido.AgentServer
+alias Jido.Signal
+
+alias SpawnBackofficeAndRecruiter.{
+  CEOAgent,
+  StudioJido
+}
+
+ceo_id = Lesson04Helpers.unique_agent_id("ceo")
+{:ok, ceo_pid} = StudioJido.start_agent(CEOAgent, id: ceo_id)
+
+{:ok, _ceo} =
+  AgentServer.call(
+    ceo_pid,
+    Signal.new!("studio.support_team_requested", %{}, source: "/ceo")
+  )
+
+ceo_state =
+  Lesson04Helpers.wait_until(fn ->
+    {:ok, state} = AgentServer.state(ceo_pid)
+
+    if Map.has_key?(state.children, :backoffice) and Map.has_key?(state.children, :recruiter) do
+      state
+    end
+  end)
+
+{:ok, _recruiter} =
+  AgentServer.call(
+    ceo_state.children.recruiter.pid,
+    Signal.new!("recruiter.role_opened", %{role: "gameplay engineer"}, source: "/ceo")
+  )
+
+{:ok, _backoffice} =
+  AgentServer.call(
+    ceo_state.children.backoffice.pid,
+    Signal.new!(
+      "backoffice.hiring_review_requested",
+      %{role: "gameplay engineer"},
+      source: "/ceo"
+    )
+  )
+
+updated_ceo_state =
+  Lesson04Helpers.wait_until(fn ->
+    {:ok, state} = AgentServer.state(ceo_pid)
+
+    if state.agent.state.recruiting_updates != [] and state.agent.state.backoffice_updates != [] do
+      state
+    end
+  end)
+
+Lesson04Helpers.safe_stop_family(ceo_id)
+
+%{
+  child_ids: Map.new(updated_ceo_state.children, fn {tag, child} -> {tag, child.id} end),
+  recruiting_updates: updated_ceo_state.agent.state.recruiting_updates,
+  backoffice_updates: updated_ceo_state.agent.state.backoffice_updates
+}
+```

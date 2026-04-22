@@ -1,0 +1,102 @@
+# Lesson 02 Livebook: Founder Runtime
+
+Lesson 2 keeps the same founder behavior, but places it behind a runtime boundary.
+
+```elixir
+Mix.install([
+  {:founder_runtime, path: "../02_founder_runtime"}
+])
+
+Application.ensure_all_started(:founder_runtime)
+```
+
+## Helpers
+
+```elixir
+defmodule Lesson02Helpers do
+  alias FounderRuntime.StudioJido
+
+  def unique_agent_id(prefix) do
+    "#{prefix}-#{System.unique_integer([:positive])}"
+  end
+
+  def safe_stop(agent_id) do
+    case StudioJido.whereis(agent_id) do
+      nil -> :ok
+      _pid -> StudioJido.stop_agent(agent_id)
+    end
+  end
+
+  def wait_until(fun, attempts \\ 20)
+
+  def wait_until(fun, attempts) when attempts > 0 do
+    case fun.() do
+      nil ->
+        Process.sleep(50)
+        wait_until(fun, attempts - 1)
+
+      value ->
+        value
+    end
+  end
+
+  def wait_until(_fun, 0) do
+    raise "condition was not met before the timeout"
+  end
+end
+```
+
+## Send Signals Into A Running Founder
+
+```elixir
+alias FounderRuntime.{FounderAgent, StudioJido}
+alias Jido.AgentServer
+alias Jido.Signal
+
+founder_id = Lesson02Helpers.unique_agent_id("founder")
+{:ok, pid} = StudioJido.start_agent(FounderAgent, id: founder_id)
+
+{:ok, _submitted_agent} =
+  AgentServer.call(
+    pid,
+    Signal.new!(
+      "studio.idea_submitted",
+      %{
+        name: "Orbit Cafe",
+        genre: "cozy sim",
+        hook: "Run a coffee shop on a drifting station"
+      },
+      source: "/livebook"
+    )
+  )
+
+{:ok, _greenlit_agent} =
+  AgentServer.call(
+    pid,
+    Signal.new!("studio.idea_greenlit", %{name: "Orbit Cafe"}, source: "/livebook")
+  )
+
+:ok =
+  AgentServer.cast(
+    pid,
+    Signal.new!("studio.milestone_planned", %{milestone: "build a playable prototype"},
+      source: "/livebook"
+    )
+  )
+
+runtime_state =
+  Lesson02Helpers.wait_until(fn ->
+    {:ok, state} = AgentServer.state(pid)
+
+    if state.agent.state.next_milestone == "build a playable prototype" do
+      state
+    end
+  end)
+
+Lesson02Helpers.safe_stop(founder_id)
+
+%{
+  listed_agents: StudioJido.list_agents(),
+  founder_state: runtime_state.agent.state
+}
+```
