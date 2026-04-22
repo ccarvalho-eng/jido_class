@@ -87,11 +87,7 @@ Those are worth learning. They simply sit one layer past the story this series i
 
 The repo is pinned with `.tool-versions` so the lessons run against an asdf-managed Elixir and Erlang toolchain that matches Jido's supported baseline.
 
-If your shell is not already resolving asdf shims first, prefix commands like this:
-
-```bash
-PATH="$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH" mix test
-```
+If `mix` is not available in your shell, configure your asdf shims first rather than prefixing each command manually.
 
 For the Livebook companions, use the repo-root helper scripts:
 

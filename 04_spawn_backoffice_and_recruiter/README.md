@@ -181,16 +181,12 @@ mix deps.get
 mix test
 ```
 
-If your shell is not already resolving asdf shims first:
-
-```bash
-PATH="$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH" mix test
-```
+If `mix` is not available in your shell, configure your asdf shims first.
 
 You can also inspect the full flow in `iex`:
 
 ```bash
-PATH="$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH" iex -S mix
+iex -S mix
 ```
 
 Then:
